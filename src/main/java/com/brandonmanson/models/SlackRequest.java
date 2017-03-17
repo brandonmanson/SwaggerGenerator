@@ -10,15 +10,17 @@ import java.util.ArrayList;
 @Component
 public class SlackRequest {
     private String token;
-    private String team_id;
-    private String team_domain;
-    private String channel_id;
-    private String channel_name;
-    private String user_id;
-    private String user_name;
+    private String teamId;
+    private String teamDomain;
+    private String channelId;
+    private String channelName;
+    private String userId;
+    private String userName;
     private String command;
     private String text;
-    private String response_url;
+    private String responseUrl;
+
+    public SlackRequest(){};
 
     public String getToken() {
         return token;
@@ -28,52 +30,52 @@ public class SlackRequest {
         this.token = token;
     }
 
-    public String getTeam_id() {
-        return team_id;
+    public String getTeamId() {
+        return teamId;
     }
 
-    public void setTeam_id(String team_id) {
-        this.team_id = team_id;
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
     }
 
-    public String getTeam_domain() {
-        return team_domain;
+    public String getTeamDomain() {
+        return teamDomain;
     }
 
-    public void setTeam_domain(String team_domain) {
-        this.team_domain = team_domain;
+    public void setTeamDomain(String teamDomain) {
+        this.teamDomain = teamDomain;
     }
 
-    public String getChannel_id() {
-        return channel_id;
+    public String getChannelId() {
+        return channelId;
     }
 
-    public void setChannel_id(String channel_id) {
-        this.channel_id = channel_id;
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
     }
 
-    public String getChannel_name() {
-        return channel_name;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setChannel_name(String channel_name) {
-        this.channel_name = channel_name;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getCommand() {
@@ -92,12 +94,12 @@ public class SlackRequest {
         this.text = text;
     }
 
-    public String getResponse_url() {
-        return response_url;
+    public String getResponseUrl() {
+        return responseUrl;
     }
 
-    public void setResponse_url(String response_url) {
-        this.response_url = response_url;
+    public void setResponseUrl(String responseUrl) {
+        this.responseUrl = responseUrl;
     }
 
     public String[] generateSwaggerValues() {
