@@ -1,0 +1,13 @@
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches
+    - $HOME/.gradle/wrapper
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: uKWYIOeVICSIzUheoogbDrfGl/vgblxrXo9w0es02NNtlmeH+3XtGcRwDPdwW6uiXdc8o3Q1/FbO5FHgLPtET/MqqLvX7ZJlU9hA5YLgVCre5akAYt73K4TENVVNXuDmbKc3v4QgRnliyVm0fBjPu4QYGE7YZdfmD5mKgX4AaRTshforu2ZJStsdK+z8lDCcFu4olL/mmlQGXId4JidUhbMjsXcxX53qvUpHdmznP/mYHb7sqRoe5CvIP1iQA9+dYo7h6z3fOSm1wzPgR0JZ2uFy1gbXgwy++GJcrOUKC7+9w1UaV3a9nDzHML4to9Sy7h+2p0ZOshZAuJm1D7TdMZA7qCh5L7PpQDLk7xXZZkZHu+yOxT1/G3waAS3Bm/BwDQj3/R1L+mC0k/ICSR5XRbanLiMJSrrRIpJKRu07u/z1cG54YK+/0s08YcnPrVdHPi4C3pJyaanmMMtHKITAnz9QUQZALP23y6b+FpVNL3l7RBYu0g45aemryk02bSH4qKzmiE+ER0lszOF6Lk7JWSSabAaT+rhMVW9Z/9gUWO8vAE8TUA9WALy070v+ohsmNMbM39rw555HMU1BeUu61c/x1G3n3DWikW2bohtMfrElDOribKI58kYJMwKUzLhTOjibq45oG+ognaHxmD5qBupHvVKGJB/1qyRnKopWpt8=
+  app: swagger-generator
