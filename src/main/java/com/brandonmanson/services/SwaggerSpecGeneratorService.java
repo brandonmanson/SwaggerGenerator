@@ -51,7 +51,7 @@ public class SwaggerSpecGeneratorService {
 
     private ObjectNode createOperationsPropertiesNode(SwaggerSpec spec, ArrayNode parameterObjectArray) {
         ObjectNode operationsPropertiesNode = spec.getMapper().createObjectNode();
-        operationsPropertiesNode.put("method", "POST");
+        operationsPropertiesNode.put("method", spec.getMethod());
         operationsPropertiesNode.put("summary", "Make this a nice summary");
         operationsPropertiesNode.put("type", "string");
         operationsPropertiesNode.putPOJO("parameters", parameterObjectArray);
