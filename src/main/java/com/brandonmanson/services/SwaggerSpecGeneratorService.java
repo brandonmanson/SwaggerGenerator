@@ -1,29 +1,33 @@
 package com.brandonmanson.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.stereotype.Service;
 import com.brandonmanson.models.SwaggerSpec;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Created by brandonmanson on 3/19/17.
- *
- * APIs property constructor
- * Path property constructor
- * Operations property constructor
- * Method property constructor
- * Parameters property constructor
- *
  */
 
 @Service
 public class SwaggerSpecGeneratorService {
 
-    public String generateSwaggerSpec(String[] swaggerValues) {
+    public String generateSwaggerSpec(String[] swaggerValues) throws JsonProcessingException {
         SwaggerSpec spec = new SwaggerSpec(swaggerValues);
         ObjectNode swaggerSpec = generateSwaggerSpec(spec);
-        return swaggerSpec.toString();
+        String formattedSpec = prettyPrintSpec(swaggerSpec, spec);
+        return formattedSpec;
+
+    }
+
+    private String prettyPrintSpec(ObjectNode swaggerSpec, SwaggerSpec spec) throws JsonProcessingException {
+        return spec.getMapper().writer().withDefaultPrettyPrinter().writeValueAsString(swaggerSpec);
     }
 
     private ObjectNode createParameterObjectNode(int parameterNumber, SwaggerSpec spec) {
@@ -40,7 +44,7 @@ public class SwaggerSpecGeneratorService {
     private ArrayNode createParameterObjectArray(SwaggerSpec spec) {
         ArrayNode parameterObjectArray = spec.getMapper().createArrayNode();
         int i = 1;
-        while (i < spec.getNumParameters())
+        while (i <= spec.getNumParameters())
         {
             ObjectNode parameterObjectNode = createParameterObjectNode(i, spec);
             ++i;
