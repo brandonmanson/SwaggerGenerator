@@ -40,11 +40,9 @@ public class SlackUploadClientService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        // Add token to headers
-        headers.set("token", token);
-
         // Construct the form data
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<String, String>();
+        formData.add("token", token);
         formData.add("filename", "your_awesome_swagger.js");
         formData.add("channels", request.getChannelId());
         formData.add("filetype", "javascript");
