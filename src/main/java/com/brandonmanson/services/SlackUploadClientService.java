@@ -53,6 +53,12 @@ public class SlackUploadClientService {
 
         // Construct the request and assign response object to response from slack
         HttpEntity<MultiValueMap<String, String>> postRequest = new HttpEntity<MultiValueMap<String, String>>(formData, headers);
-        restTemplate.postForEntity("https://slack.com/api/files.upload", postRequest, SlackResponse.class);
+        ResponseEntity<SlackResponse> response = restTemplate.postForEntity("https://slack.com/api/files.upload", postRequest, SlackResponse.class);
+        if (response.getBody().getFile() != null)
+        {
+            System.out.println(response.getStatusCode() + "\n" + response.getBody().getFile());
+        }
+
+        System.out.println(response.getStatusCode() + "\n" + response.getBody().getError());
     }
 }
