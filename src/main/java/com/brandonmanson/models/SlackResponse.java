@@ -1,10 +1,13 @@
 package com.brandonmanson.models;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 
 /**
  * Created by brandonmanson on 3/22/17.
  */
+@Component
 public class SlackResponse {
 
     private boolean ok;

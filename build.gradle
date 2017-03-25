@@ -24,5 +24,6 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-json-org:2.4.0')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

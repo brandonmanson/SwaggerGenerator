@@ -8,10 +8,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -22,6 +25,7 @@ import java.util.regex.Pattern;
  * Created by brandonmanson on 3/16/17.
  */
 @RestController
+@PropertySource("classpath:application.properties")
 @RequestMapping(value = "/swaggerSpecs")
 public class SwaggerSpecGeneratorController {
 
@@ -31,11 +35,13 @@ public class SwaggerSpecGeneratorController {
     @Autowired
     SlackUploadClientService uploadClientService;
 
+
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public String generateSwaggerSpecAndReturnAck(SlackRequest request) throws UnsupportedEncodingException, JsonProcessingException {
-        String[] swaggerValues = request.generateSwaggerValues();
+    public String generateSwaggerSpecAndReturnAck(WebRequest request) throws UnsupportedEncodingException, JsonProcessingException {
+        SlackRequest slackRequest = new SlackRequest(request);
+        String[] swaggerValues = slackRequest.generateSwaggerValues();
         String spec = generatorService.generateSwaggerSpec(swaggerValues);
         String ackString;
 
@@ -48,8 +54,10 @@ public class SwaggerSpecGeneratorController {
                 + "\nmethod: " + swaggerValues[1]
                 + "\nnumber of parameters: " + swaggerValues[2];
 
+        // TODO: Implement proper authentication to store user tokens and inject them here
+        String token = "";
 
-        uploadClientService.postSwaggerSpecToSlackChannel(request, spec);
+        uploadClientService.postSwaggerSpecToSlackChannel(slackRequest, spec, token);
 
 
         return ackString;

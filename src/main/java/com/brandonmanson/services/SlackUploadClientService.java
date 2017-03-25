@@ -2,6 +2,9 @@ package com.brandonmanson.services;
 
 import com.brandonmanson.models.SlackRequest;
 import com.brandonmanson.models.SlackResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +17,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import java.util.concurrent.Future;
+import com.fasterxml.jackson.datatype.jsonorg.JsonOrgModule;
 
 /**
  * Created by brandonmanson on 3/21/17.
@@ -21,17 +25,11 @@ import java.util.concurrent.Future;
 @Service
 public class SlackUploadClientService {
 
-    private final RestTemplate restTemplate;
-
-    public SlackUploadClientService(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.build();
-    }
-
     @Async
-    public void postSwaggerSpecToSlackChannel(SlackRequest request, String swaggerSpec) {
+    public void postSwaggerSpecToSlackChannel(SlackRequest request, String swaggerSpec, String token) {
 
-        // Get token from request
-        String token = request.getToken();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JsonOrgModule());
 
         // Create rest template
         RestTemplate restTemplate = new RestTemplate();
@@ -43,6 +41,7 @@ public class SlackUploadClientService {
         // Construct the form data
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<String, String>();
         formData.add("token", token);
+        System.out.println(token);
         formData.add("filename", "your_awesome_swagger.js");
         formData.add("channels", request.getChannelId());
         formData.add("filetype", "javascript");
@@ -51,12 +50,8 @@ public class SlackUploadClientService {
 
         // Construct the request and assign response object to response from slack
         HttpEntity<MultiValueMap<String, String>> postRequest = new HttpEntity<MultiValueMap<String, String>>(formData, headers);
-        ResponseEntity<SlackResponse> response = restTemplate.postForEntity("https://slack.com/api/files.upload", postRequest, SlackResponse.class);
-        if (response.getBody().getFile() != null)
-        {
-            System.out.println(response.getStatusCode() + "\n" + response.getBody().getFile());
-        }
-
-        System.out.println(response.getStatusCode() + "\n" + response.getBody().getError());
+        System.out.println(postRequest.toString());
+        ResponseEntity<JSONObject> response = restTemplate.postForEntity("https://slack.com/api/files.upload", postRequest, JSONObject.class);
+        System.out.println(response.getBody());
     }
 }

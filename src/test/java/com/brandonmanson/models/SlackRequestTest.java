@@ -18,7 +18,6 @@ public class SlackRequestTest extends TestCase {
 
     @Before
     public void setup() {
-        request.setToken("g123a4567b89");
         request.setTeamId("test_team_id");
         request.setTeamDomain("test_team_domain.slack.com");
         request.setChannelId("test_channel_id");
