@@ -2,10 +2,12 @@ package com.brandonmanson.models;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by brandonmanson on 3/20/17.
  */
+@Component
 public class SwaggerSpec {
 
     private ObjectMapper mapper;

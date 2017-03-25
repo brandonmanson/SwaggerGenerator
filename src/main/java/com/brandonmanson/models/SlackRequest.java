@@ -1,6 +1,8 @@
 package com.brandonmanson.models;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
 
@@ -9,7 +11,6 @@ import java.util.ArrayList;
  */
 @Component
 public class SlackRequest {
-    private String token;
     private String teamId;
     private String teamDomain;
     private String channelId;
@@ -22,12 +23,16 @@ public class SlackRequest {
 
     public SlackRequest(){};
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+    public SlackRequest(WebRequest request) {
+        this.teamId = request.getParameter("team_id");
+        this.teamDomain = request.getParameter("team_domain");
+        this.channelId = request.getParameter("channel_id");
+        this.channelName = request.getParameter("channel_name");
+        this.userId = request.getParameter("user_id");
+        this.userName = request.getParameter("user_name");
+        this.command = request.getParameter("command");
+        this.text = request.getParameter("text");
+        this.responseUrl = request.getParameter("response_url");
     }
 
     public String getTeamId() {
@@ -105,5 +110,19 @@ public class SlackRequest {
     public String[] generateSwaggerValues() {
         String[] swaggerValues = text.split(" ");
         return swaggerValues;
+    }
+
+    @Override
+    public String toString() {
+        String slackRequest = "teamId: " + teamId
+                + "\nteamDomain: " + teamDomain
+                + "\nchannel_id: " + channelId
+                + "\nchannelName: " + channelName
+                + "\nuserId: " + userId
+                + "\nuserName: " + userName
+                + "\ncommand: " + command
+                + "\ntext: " + text
+                + "\nresponseUrl: " + responseUrl;
+        return slackRequest;
     }
 }
