@@ -41,7 +41,7 @@ public class AuthenticationController {
         formData.add("client_id", clientId);
         formData.add("client_secret", clientSecret);
         formData.add("code", code);
-        formData.add("redirect_uri", "http://localhost:8080/authenticate/redirect");
+        formData.add("redirect_uri", "https://swagger-generator.herokuapp.com/authenticate/redirect");
 
         HttpEntity<MultiValueMap<String, String>> postRequest = new HttpEntity<MultiValueMap<String, String>>(formData, headers);
         ResponseEntity<String> response = restTemplate.postForEntity("https://slack.com/api/oauth.access", postRequest, String.class);
