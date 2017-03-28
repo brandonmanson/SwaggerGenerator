@@ -1,30 +1,22 @@
 package com.brandonmanson.controllers;
 
 import com.brandonmanson.models.SlackRequest;
-import com.brandonmanson.models.User;
-import com.brandonmanson.repositories.UserRepository;
-import com.brandonmanson.services.RetrieveUserService;
+import com.brandonmanson.models.Team;
+import com.brandonmanson.repositories.TeamRepository;
+import com.brandonmanson.services.RetrieveTeamService;
 import com.brandonmanson.services.SlackUploadClientService;
 import com.brandonmanson.services.SwaggerSpecGeneratorService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by brandonmanson on 3/16/17.
@@ -41,10 +33,10 @@ public class SwaggerSpecGeneratorController {
     SlackUploadClientService uploadClientService;
 
     @Autowired
-    RetrieveUserService retrieveUserService;
+    RetrieveTeamService retrieveTeamService;
 
     @Autowired
-    UserRepository userRepository;
+    TeamRepository teamRepository;
 
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -67,7 +59,7 @@ public class SwaggerSpecGeneratorController {
                 + "\nnumber of parameters: " + swaggerValues[2];
 
 
-        List<User> userList = retrieveUserService.getUserFromSlackRequest(slackRequest);
+        List<Team> userList = retrieveTeamService.getUserFromSlackRequest(slackRequest);
         String token = userList.get(0).getAccessToken();
 
 
