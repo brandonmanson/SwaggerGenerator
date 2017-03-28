@@ -4,10 +4,7 @@ package com.brandonmanson.models;
  * Created by brandonmanson on 3/27/17.
  */
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by brandonmanson on 3/26/17.
@@ -18,9 +15,11 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "teamId", unique = true)
+    private String teamId;
+
     private String scope;
     private String teamName;
-    private String teamId;
     private String botAccessToken;
     private String botUserId;
 
