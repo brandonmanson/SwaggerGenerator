@@ -12,6 +12,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import javax.activation.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.*;
 
 @SpringBootApplication
 @EnableAsync
@@ -27,17 +28,27 @@ public class SwaggerGeneratorApplication {
 	}
 
 	@Bean
-	public BasicDataSource dataSource() throws URISyntaxException {
+	public BasicDataSource dataSource() throws URISyntaxException, ClassNotFoundException {
+
 		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
 		String userName = dbUri.getUserInfo().split(":")[0];
 		String password = dbUri.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
 
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUrl(dbUrl);
 		dataSource.setUsername(userName);
 		dataSource.setPassword(password);
+		String dbUrl = "jdbc:postgresql://"
+				+ dbUri.getHost()
+				+ ":"
+				+ dbUri.getPort()
+				+ dbUri.getPath()
+				+ "?sslmode=require&user="
+				+ dataSource.getUsername()
+				+ "&password="
+				+ dataSource.getPassword();
+		dataSource.setUrl(dbUrl);
+		dataSource.setDriverClassName("org.postgresql.Driver");
 
 		return dataSource;
 	}
