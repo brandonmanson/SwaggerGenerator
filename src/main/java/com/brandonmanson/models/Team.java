@@ -1,7 +1,8 @@
 package com.brandonmanson.models;
 
-import org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration;
-import org.springframework.stereotype.Repository;
+/**
+ * Created by brandonmanson on 3/27/17.
+ */
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ import javax.persistence.Id;
  * Created by brandonmanson on 3/26/17.
  */
 @Entity
-public class User {
+public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -22,7 +23,7 @@ public class User {
     private String teamName;
     private String teamId;
 
-    public User(){};
+    public Team(){};
 
     public Integer getId() {
         return id;
@@ -63,5 +64,4 @@ public class User {
     public void setTeamId(String teamId) {
         this.teamId = teamId;
     }
-
 }

@@ -1,7 +1,7 @@
 package com.brandonmanson.controllers;
 
-import com.brandonmanson.models.User;
-import com.brandonmanson.repositories.UserRepository;
+import com.brandonmanson.models.Team;
+import com.brandonmanson.repositories.TeamRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.ui.Model;
 
 /**
  * Created by brandonmanson on 3/26/17.
@@ -29,7 +28,7 @@ public class AuthenticationController {
     private String clientSecret;
 
     @Autowired
-    private UserRepository userRepository;
+    private TeamRepository teamRepository;
 
     @RequestMapping(value = "/redirect", method = RequestMethod.GET)
     public String getApiToken(@RequestParam String code) throws JSONException {
@@ -49,12 +48,13 @@ public class AuthenticationController {
         JSONObject responseToJson = new JSONObject(response.getBody());
 
 
-        User user = new User();
-        user.setAccessToken(responseToJson.getString("access_token"));
-        user.setScope(responseToJson.getString("scope"));
-        user.setTeamName(responseToJson.getString("team_name"));
-        user.setTeamId(responseToJson.getString("team_id"));
-        userRepository.save(user);
+        Team team = new Team();
+        team.setAccessToken(responseToJson.getString("access_token"));
+        team.setScope(responseToJson.getString("scope"));
+        team.setTeamName(responseToJson.getString("team_name"));
+        team.setTeamId(responseToJson.getString("team_id"));
+        teamRepository.save(team);
+
 
         return "Authenticated!";
     }
