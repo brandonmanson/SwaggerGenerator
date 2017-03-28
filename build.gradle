@@ -25,5 +25,11 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-json-org:2.4.0')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.hibernate:hibernate-core:5.2.9.Final')
+	compile('mysql:mysql-connector-java')
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("org.springframework.boot:spring-boot-devtools")
+	compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.2.2'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

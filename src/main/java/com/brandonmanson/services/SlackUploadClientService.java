@@ -3,6 +3,7 @@ package com.brandonmanson.services;
 import com.brandonmanson.models.SlackRequest;
 import com.brandonmanson.models.SlackResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -26,7 +27,7 @@ import com.fasterxml.jackson.datatype.jsonorg.JsonOrgModule;
 public class SlackUploadClientService {
 
     @Async
-    public void postSwaggerSpecToSlackChannel(SlackRequest request, String swaggerSpec, String token) {
+    public void postSwaggerSpecToSlackChannel(SlackRequest request, String swaggerSpec, String token) throws JSONException {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JsonOrgModule());
@@ -41,7 +42,6 @@ public class SlackUploadClientService {
         // Construct the form data
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<String, String>();
         formData.add("token", token);
-        System.out.println(token);
         formData.add("filename", "your_awesome_swagger.js");
         formData.add("channels", request.getChannelId());
         formData.add("filetype", "javascript");
@@ -50,8 +50,7 @@ public class SlackUploadClientService {
 
         // Construct the request and assign response object to response from slack
         HttpEntity<MultiValueMap<String, String>> postRequest = new HttpEntity<MultiValueMap<String, String>>(formData, headers);
-        System.out.println(postRequest.toString());
-        ResponseEntity<JSONObject> response = restTemplate.postForEntity("https://slack.com/api/files.upload", postRequest, JSONObject.class);
-        System.out.println(response.getBody());
+        ResponseEntity<String> response = restTemplate.postForEntity("https://slack.com/api/files.upload", postRequest, String.class);
+        JSONObject responseToJson = new JSONObject(response.getBody());
     }
 }
