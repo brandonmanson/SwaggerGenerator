@@ -41,19 +41,21 @@ public class AuthenticationController {
         formData.add("client_id", clientId);
         formData.add("client_secret", clientSecret);
         formData.add("code", code);
-        formData.add("redirect_uri", "https://swagger-generator.herokuapp.com/authenticate/redirect");
+        formData.add("redirect_uri", "http://localhost:8080/authenticate/redirect");
 
         HttpEntity<MultiValueMap<String, String>> postRequest = new HttpEntity<MultiValueMap<String, String>>(formData, headers);
         ResponseEntity<String> response = restTemplate.postForEntity("https://slack.com/api/oauth.access", postRequest, String.class);
         JSONObject responseToJson = new JSONObject(response.getBody());
-        System.out.println("--------------Response from auth:" + responseToJson.toString() + "--------------");
 
+        String botAccessToken = responseToJson.getJSONObject("bot").get("bot_access_token").toString();
+        String botUserId = responseToJson.getJSONObject("bot").get("bot_user_id").toString();
 
         Team team = new Team();
-        team.setAccessToken(responseToJson.getString("access_token"));
         team.setScope(responseToJson.getString("scope"));
         team.setTeamName(responseToJson.getString("team_name"));
         team.setTeamId(responseToJson.getString("team_id"));
+        team.setBotAccessToken(botAccessToken);
+        team.setBotUserId(botUserId);
         teamRepository.save(team);
 
 

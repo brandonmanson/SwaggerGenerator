@@ -18,10 +18,11 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String accessToken;
     private String scope;
     private String teamName;
     private String teamId;
+    private String botAccessToken;
+    private String botUserId;
 
     public Team(){};
 
@@ -31,14 +32,6 @@ public class Team {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
     }
 
     public String getScope() {
@@ -63,5 +56,21 @@ public class Team {
 
     public void setTeamId(String teamId) {
         this.teamId = teamId;
+    }
+
+    public String getBotAccessToken() {
+        return botAccessToken;
+    }
+
+    public void setBotAccessToken(String botAccessToken) {
+        this.botAccessToken = botAccessToken;
+    }
+
+    public String getBotUserId() {
+        return botUserId;
+    }
+
+    public void setBotUserId(String botUserId) {
+        this.botUserId = botUserId;
     }
 }

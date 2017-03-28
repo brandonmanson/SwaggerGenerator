@@ -60,7 +60,7 @@ public class SwaggerSpecGeneratorController {
 
 
         List<Team> userList = retrieveTeamService.getUserFromSlackRequest(slackRequest);
-        String token = userList.get(0).getAccessToken();
+        String token = userList.get(0).getBotAccessToken();
 
 
         uploadClientService.postSwaggerSpecToSlackChannel(slackRequest, spec, token);
