@@ -32,7 +32,7 @@ public class SwaggerGeneratorApplication {
 
 		String userName = dbUri.getUserInfo().split(":")[0];
 		String password = dbUri.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql//" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
 
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setUrl(dbUrl);
