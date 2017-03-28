@@ -46,6 +46,7 @@ public class AuthenticationController {
         HttpEntity<MultiValueMap<String, String>> postRequest = new HttpEntity<MultiValueMap<String, String>>(formData, headers);
         ResponseEntity<String> response = restTemplate.postForEntity("https://slack.com/api/oauth.access", postRequest, String.class);
         JSONObject responseToJson = new JSONObject(response.getBody());
+        System.out.println("--------------Response from auth:" + responseToJson.toString() + "--------------");
 
 
         Team team = new Team();
