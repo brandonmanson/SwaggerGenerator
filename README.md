@@ -1,12 +1,13 @@
 # Swaggy
-Generate boilerplate code for Swagger without leaving Slack!
+
 
 [![](https://platform.slack-edge.com/img/add_to_slack.png)](https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,files%3Awrite%3Auser&client_id=4460641922.158836768032&redirect_uri=https://swagger-generator.herokuapp.com/authenticate/redirect)
 
+#### Generate boilerplate code for Swagger without leaving Slack!
 
 Swaggy is a nifty tool that takes the pain out of bootstrapping a new Swagger definition. Need to define a new endpoint for that sweet app you're working on? No problem. You don't even have to leave Slack!
 
-## How to use
+# How to use
 Once you've added Swaggy to your team, you'll be able to generate new Swagger code like this:
 `/swagger /path/to/endpoint METHOD (GET, POST, etc) NUMBER_OF_PARAMETERS`.
 
