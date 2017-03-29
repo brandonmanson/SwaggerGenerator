@@ -11,6 +11,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Created by brandonmanson on 3/26/17.
  */
-@RestController
+@Controller
 @RequestMapping("/authenticate")
 public class AuthenticationController {
     @Value("${client.id}")
@@ -76,7 +77,7 @@ public class AuthenticationController {
         }
 
 
-        return "Authenticated!";
+        return "success";
     }
 
 

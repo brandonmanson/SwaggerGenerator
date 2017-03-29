@@ -8,6 +8,7 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.activation.DataSource;
 import java.net.URI;
@@ -16,6 +17,7 @@ import java.sql.*;
 
 @SpringBootApplication
 @EnableAsync
+@EnableWebMvc
 public class SwaggerGeneratorApplication {
 
 	@Bean
