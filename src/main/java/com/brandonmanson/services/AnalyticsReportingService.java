@@ -23,7 +23,6 @@ public class AnalyticsReportingService {
     private String swaggyDevChannelId;
 
     public void track(SlackRequest request) {
-        System.out.println(swaggyDevChannelId);
         if (!request.getChannelId().equals(swaggyDevChannelId))
         {
             Map<String, Object> event = new HashMap<String, Object>();
