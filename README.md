@@ -47,6 +47,8 @@ Kinda cool right?
 # New Features!
 Swaggy is a bit of a one trick pony right now and it's very much a work in progress. If you have an idea of how to make Swaggy better, please open an issue or hit me up on Twitter @brandonmanson.
 # Coming Soon
+- REST API so you can generate Swagger boilerplate from Postman, command line or however else you interact with APIs.
+- Web interface so you can generate Swagger boilerplate from your browser. 
 - More info on how you can contribute to this project. It's open sourced under the MIT license as well so you can fork to your heart's delight.
 - Updates to make Swaggy more robust
 - More tests and things of that nature
