@@ -1,5 +1,7 @@
 package com.brandonmanson;
 
+import io.keen.client.java.JavaKeenClientBuilder;
+import io.keen.client.java.KeenClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -53,6 +55,17 @@ public class SwaggerGeneratorApplication {
 		dataSource.setDriverClassName("org.postgresql.Driver");
 
 		return dataSource;
+	}
+
+	@Bean
+	public KeenClient keenClient() {
+		KeenClient client = new JavaKeenClientBuilder().build();
+
+		KeenClient.initialize(client);
+
+		return client;
+
+
 	}
 
 

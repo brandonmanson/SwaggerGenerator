@@ -33,5 +33,6 @@ dependencies {
 	compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.2.2'
 	compile group: 'org.postgresql', name: 'postgresql', version: '42.0.0'
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile 'io.keen:keen-client-api-java:3.0.0'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
