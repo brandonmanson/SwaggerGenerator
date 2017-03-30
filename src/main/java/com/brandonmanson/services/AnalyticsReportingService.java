@@ -27,7 +27,8 @@ public class AnalyticsReportingService {
         {
             Map<String, Object> event = new HashMap<String, Object>();
             event.put("channel", request.getChannelId());
-            KeenClient.client().addEvent("prod_specs", event);
+            event.put("team", request.getTeamId());
+            KeenClient.client().addEvent("specs_uploaded", event);
         }
     }
 
