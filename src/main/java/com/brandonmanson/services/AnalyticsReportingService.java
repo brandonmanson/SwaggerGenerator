@@ -22,13 +22,16 @@ public class AnalyticsReportingService {
     @Value("${swaggy.dev.channel.id}")
     private String swaggyDevChannelId;
 
+    @Value("${analytics.stream.id}")
+    private String streamId;
+
     public void track(SlackRequest request) {
         if (!request.getChannelId().equals(swaggyDevChannelId))
         {
             Map<String, Object> event = new HashMap<String, Object>();
             event.put("channel", request.getChannelId());
             event.put("team", request.getTeamId());
-            KeenClient.client().addEvent("specs_uploaded", event);
+            KeenClient.client().addEvent(streamId, event);
         }
     }
 

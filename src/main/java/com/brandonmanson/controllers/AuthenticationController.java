@@ -31,6 +31,9 @@ public class AuthenticationController {
     @Value("${client.secret}")
     private String clientSecret;
 
+    @Value("${redirect.uri}")
+    private String redirectUri;
+
     @Autowired
     private TeamRepository teamRepository;
 
@@ -49,7 +52,7 @@ public class AuthenticationController {
         formData.add("client_id", clientId);
         formData.add("client_secret", clientSecret);
         formData.add("code", code);
-        formData.add("redirect_uri", "https://swagger-generator.herokuapp.com/authenticate/redirect");
+        formData.add("redirect_uri", String.format(redirectUri + "/authenticate/redirect"));
 
         HttpEntity<MultiValueMap<String, String>> postRequest = new HttpEntity<MultiValueMap<String, String>>(formData, headers);
         ResponseEntity<String> response = restTemplate.postForEntity("https://slack.com/api/oauth.access", postRequest, String.class);
