@@ -13,7 +13,7 @@ public class SwaggerSpec {
     private ObjectMapper mapper;
     private String path;
     private String method;
-    private int numParameters;
+    private String paramType;
 
 
     public SwaggerSpec() {
@@ -22,9 +22,9 @@ public class SwaggerSpec {
 
     public SwaggerSpec(String[] swaggerValues) {
         this.mapper = new ObjectMapper();
-        this.path = swaggerValues[0];
-        this.method = swaggerValues[1];
-        this.numParameters = Integer.parseInt(swaggerValues[2]);
+        this.path = swaggerValues[0].toLowerCase();
+        this.method = swaggerValues[1].toLowerCase();
+        this.paramType = swaggerValues[2].toLowerCase();
     }
 
     public ObjectMapper getMapper() {
@@ -39,7 +39,12 @@ public class SwaggerSpec {
         return method;
     }
 
-    public int getNumParameters() {
-        return numParameters;
+    public String getParamType() {
+        return paramType;
     }
+
+    public void setParamType(String paramType) {
+        this.paramType = paramType;
+    }
+
 }

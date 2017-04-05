@@ -54,7 +54,7 @@ public class SwaggerSpecGeneratorController {
 
         SlackRequest slackRequest = new SlackRequest(request);
         String[] swaggerValues = slackRequest.generateSwaggerValues();
-        String spec = generatorService.generateSwaggerSpec(swaggerValues);
+        String spec = generatorService.generateSwaggerSpecFromSwaggerValues(swaggerValues);
         String ackString;
 
         if (swaggerValues.length < 3 || swaggerValues.length > 3)
