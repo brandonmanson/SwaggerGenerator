@@ -169,7 +169,7 @@ public class SwaggerSpecGeneratorService {
         ObjectNode infoObject = createInfoObject(spec);
         swaggerObject.put("swagger", "2.0");
         swaggerObject.putPOJO("info", infoObject);
-        swaggerObject.put("basePath", "http://your_host_name/base_path");
+        swaggerObject.put("basePath", "/api");
         swaggerObject.putPOJO("paths", pathObjectNode);
         return swaggerObject;
     }
