@@ -110,38 +110,16 @@ public class SwaggerSpecGeneratorService {
         return parameterObjectNode;
     }
 
-    // Create a Parameter Object with param type 'Body' that contains an Array in Schema
-    private ObjectNode createBodyParameterNodeContainingArray(SwaggerSpec spec) {
-        ObjectNode bodyParameterObjectNodeWithArray = spec.getMapper().createObjectNode();
-        ObjectNode schemaObject = generateSchemaObjectWithItemObject(spec);
-        generateParameterObjectStandardValues(bodyParameterObjectNodeWithArray, spec);
-        bodyParameterObjectNodeWithArray.putPOJO("schema", schemaObject);
-        return bodyParameterObjectNodeWithArray;
-    }
-
-    // Create a Parameter Object with param type other than 'Body' that has an array
-    private ObjectNode createDefaultParameterObjectNodeContainingArray(SwaggerSpec spec) {
-        ObjectNode parameterNodeWithArray = spec.getMapper().createObjectNode();
-        ObjectNode itemsObject = createItemsObject(spec);
-        generateParameterObjectStandardValues(parameterNodeWithArray, spec);
-        parameterNodeWithArray.putPOJO("items", itemsObject);
-        return parameterNodeWithArray;
-    }
-
 
     private ArrayNode createParameterObjectArray(SwaggerSpec spec) {
         ArrayNode parameterObjectArray = spec.getMapper().createArrayNode();
         if (spec.getParamType().equals("body"))
         {
             ObjectNode bodyParameterObjectNode = createBodyParameterObjectNode(spec);
-            ObjectNode bodyParameterObjectNodeContainingArray = createBodyParameterNodeContainingArray(spec);
             parameterObjectArray.add(bodyParameterObjectNode);
-            parameterObjectArray.add(bodyParameterObjectNodeContainingArray);
         } else {
             ObjectNode defaultParameterNode = createDefaultParameterObjectNode(spec);
-            ObjectNode defaultParameterNodeContainingArray = createDefaultParameterObjectNodeContainingArray(spec);
             parameterObjectArray.add(defaultParameterNode);
-            parameterObjectArray.add(defaultParameterNodeContainingArray);
         }
 
         return parameterObjectArray;
