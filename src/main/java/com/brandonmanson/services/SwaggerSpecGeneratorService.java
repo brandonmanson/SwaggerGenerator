@@ -33,7 +33,12 @@ public class SwaggerSpecGeneratorService {
 
     // These are always the same regardless of parameter type
     private void generateParameterObjectStandardValues(ObjectNode objectNode, SwaggerSpec spec) {
-        objectNode.put("name", "subject");
+        if (spec.getParamType().equals("path"))
+        {
+            objectNode.put("name", "your_param");
+        } else {
+            objectNode.put("name", "subject");
+        }
         objectNode.put("in", spec.getParamType());
         objectNode.put("description", "describe this parameter");
         objectNode.put("required", "true or false. change this to a boolean");
